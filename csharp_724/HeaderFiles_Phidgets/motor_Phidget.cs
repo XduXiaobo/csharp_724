@@ -19,10 +19,26 @@ namespace csharp_724.HeaderFiles_Phidget
             try
             {
 
-                stepper.Engaged = true;
+                bool Engaged = stepper.Engaged;//get engaged
+
                 voltage.DeviceSerialNumber=123456;
+
                 voltage.Channel = 0;
+
+                voltage.Attach+=voltage_Attach;
+                voltage.Detach+=voltage_Detach;
+                voltage.Error += voltage_Error;
+                stepper.PositionChange += stepper_PositionChange;
+
                 stepper.Open(Phidget.DefaultTimeout);
+
+                double MaxPosition = stepper.MaxPosition; 
+                double MinPosition = stepper.MinPosition;
+                double VelocityLimit = stepper.VelocityLimit;
+                double CurrentLimit = stepper.CurrentLimit;
+                double Acceleration = stepper.Acceleration;
+
+                stepper.Engaged = true;//set engaged
                 stepper.Close();
             }   catch(PhidgetException ex)
             {
@@ -34,6 +50,41 @@ namespace csharp_724.HeaderFiles_Phidget
             //ch.Engaged = true;
             //ch.Close();
             return true;
+        }
+        private static void voltage_Attach(object sender, Phidget22.Events.AttachEventArgs e)
+        {
+
+            // Access event source via the sender object
+            VoltageInput ch = (VoltageInput)sender;
+
+            // Access event data via the EventArgs
+        }
+        private static void voltage_Detach(object sender, Phidget22.Events.DetachEventArgs e)
+        {
+
+            // Access event source via the sender object
+            VoltageInput ch = (VoltageInput)sender;
+
+            // Access event data via the EventArgs
+        }
+        private static void voltage_Error(object sender, Phidget22.Events.ErrorEventArgs e)
+        {
+
+            // Access event source via the sender object
+            VoltageInput ch = (VoltageInput)sender;
+
+            // Access event data via the EventArgs
+            ErrorEventCode code = e.Code;
+            string description = e.Description;
+        }
+        private static void stepper_PositionChange(object sender, Phidget22.Events.StepperPositionChangeEventArgs e)
+        {
+
+            // Access event source via the sender object
+            Stepper ch = (Stepper)sender;
+
+            // Access event data via the EventArgs
+            double position = e.Position;
         }
         public int motor_accreactionset(int accreaction){
             
