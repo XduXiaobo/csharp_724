@@ -13,7 +13,10 @@ namespace csharp_724.HeaderFiles_Phidget
     {
         Stepper stepper = new Stepper();
         VoltageInput voltage = new VoltageInput();
-        
+        /// <summary>
+        /// intitialise
+        /// </summary>
+        /// <returns></returns>
         public bool motor_initialise()
         {
             try
